@@ -1,0 +1,112 @@
+.btn-link {
+    border: none;
+    color: #343a40;
+
+    &.edit {
+        margin-left: auto;
+    }
+}
+
+.alert {
+    display: none;
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.locations-list {
+    max-height: 400px;
+    overflow-y: auto;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    .row {
+        padding: 0;
+        align-items: center;
+
+
+
+        .divEdit {
+            padding: 2px 8px;
+            display: none;
+            width: 100%;
+        }
+
+        .divShow {
+            padding: 8px 8px;
+            display: flex;
+            background-color: #fff;
+            transition: 0.2s;
+            cursor: pointer;
+            border-radius: 5px;
+
+            &:hover {
+                background-color: #eee;
+            }
+
+            div {
+                width: 70%;
+                cursor:inherit;
+            }
+
+            label {
+                width: 100%;
+                cursor:inherit;
+
+                font-size: smaller;
+
+                &.name {
+                    font-size: larger;
+                }
+            }
+
+            button {
+                padding: 4px;
+            }
+        }
+
+        label {
+            margin-bottom: 0;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        .apply {
+            margin-top: 8px;
+        }
+    }
+}
+
+.map-card {
+    padding: 0;
+
+    #map {
+        width: auto;
+        height: 554px;
+    }
+}
+
+form {
+    .row {
+        padding: 4px 0;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    input.form-control {
+        margin-bottom: 8px !important;
+
+        &[name=latitude] {
+            margin-right: 4px;
+        }
+
+        &[name=longitude] {
+            margin-left: 4px !important;
+        }
+    }
+}

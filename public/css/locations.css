@@ -1,0 +1,109 @@
+.btn-link {
+  border: none;
+  color: #343a40;
+}
+
+.btn-link.edit {
+  margin-left: auto;
+}
+
+.alert {
+  display: none;
+}
+
+.alert p {
+  margin-bottom: 0;
+}
+
+.locations-list {
+  max-height: 400px;
+  overflow-y: auto;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.locations-list .row {
+  padding: 0;
+  align-items: center;
+}
+
+.locations-list .row .divEdit {
+  padding: 2px 8px;
+  display: none;
+  width: 100%;
+}
+
+.locations-list .row .divShow {
+  padding: 8px 8px;
+  display: flex;
+  background-color: #fff;
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.locations-list .row .divShow:hover {
+  background-color: #eee;
+}
+
+.locations-list .row .divShow div {
+  width: 70%;
+  cursor: inherit;
+}
+
+.locations-list .row .divShow label {
+  width: 100%;
+  cursor: inherit;
+  font-size: smaller;
+}
+
+.locations-list .row .divShow label.name {
+  font-size: larger;
+}
+
+.locations-list .row .divShow button {
+  padding: 4px;
+}
+
+.locations-list .row label {
+  margin-bottom: 0;
+}
+
+.locations-list .row input {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.locations-list .row .apply {
+  margin-top: 8px;
+}
+
+.map-card {
+  padding: 0;
+}
+
+.map-card #map {
+  width: auto;
+  height: 554px;
+}
+
+form .row {
+  padding: 4px 0;
+}
+
+form .btn {
+  width: 100%;
+}
+
+form input.form-control {
+  margin-bottom: 8px !important;
+}
+
+form input.form-control[name=latitude] {
+  margin-right: 4px;
+}
+
+form input.form-control[name=longitude] {
+  margin-left: 4px !important;
+}
+
