@@ -10,7 +10,7 @@
     <script src="https://api-maps.yandex.ru/2.1/?apikey={{ env('YAPI_KEY', null) }}&lang=ru_RU" type="text/javascript"></script>
 
     <!-- Styles -->
-    <link href="{{ asset('css/locations.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/locations.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
