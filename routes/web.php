@@ -1,5 +1,5 @@
 <?php
-Auth::routes(['register' => false]);
+Auth::routes(['register' => env('REGISTER_ENABLED', false)]);
 
 Route::view('/', 'about');
 Route::view('/about', 'about')->name('about');
