@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Location;
+use App\Worker;
 use Auth;
 use Carbon\Carbon;
 use Request;
@@ -15,7 +16,8 @@ class LocationsController extends Controller
             $locations = Location::where('user_id', Auth::user()->id)
                 ->orderBy('created_at', 'desc')
                 ->get();
-            return view('locations', compact('locations'));
+            $workers = Worker::all();
+            return view('locations', compact('locations', 'workers'));
         } else {
             return redirect('/login');
         }

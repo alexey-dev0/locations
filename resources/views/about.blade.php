@@ -19,7 +19,7 @@
                 @endauth
                 @guest
                     <a href="{{ url('/login') }}" class="btn btn-primary my-2">Login</a>
-                    <a href="{{ url('/register') }}" class="btn btn-secondary my-2">Sign in</a>
+{{--                    <a href="{{ url('/register') }}" class="btn btn-secondary my-2">Sign in</a>--}}
                 @endguest
             </p>
         </div>
