@@ -68,6 +68,30 @@
             setInterval(updateWorkers, UPDATE_DELAY);
         });
 
+        function addWorkerRow(worker) {
+            const aboutInfo = (worker.first_name || worker.last_name) ? `
+                <label class="name">` + worker.first_name + ' ' + worker.last_name + `</label>
+                <label class="phone">` + worker.phone + `</label>
+            ` : `
+                <label class="name">` + worker.phone + `</label>
+            `;
+            $('.locations-list').append(`
+                <div class="row" id="` + worker.id + `">
+                    <div class="divShow">
+                        <div>` +
+                            aboutInfo + `
+                            <label class="text-muted lat-lon">[` + worker.latitude + '; ' + worker.longitude + `]</label>
+                        </div>
+                        <div class="status on"><i class="fas fa-check fa-lg"></i></div>
+                        <div class="status off"> <i class="fas fa-times fa-lg"></i></div>
+                    </div>
+                </div>
+            `);
+            $('.row#' + worker.id + ' .divShow').on('click', function () {
+                locateToPlacemark(worker.id);
+            });
+        }
+
         function updateWorkers() {
             $.ajax({
                 headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
@@ -75,7 +99,19 @@
                 type: 'GET',
                 success: function (response) {
                     response.forEach(worker => {
-                        const marker = getPlacemark(worker.id);
+                        let marker = getPlacemark(worker.id);
+                        if (marker == null) {
+                            marker = addWorkerPlacemark(
+                                worker.id,
+                                worker.first_name,
+                                worker.last_name,
+                                worker.phone,
+                                worker.latitude,
+                                worker.longitude,
+                                worker.last_update
+                            );
+                            addWorkerRow(worker);
+                        }
                         const active = isActive(worker.last_update);
                         const row = $('.row#' + worker.id);
                         if (active) {
@@ -140,22 +176,11 @@
         }
 
         function isActive(last_update) {
-            const now = new Date();
-            const last = new Date(last_update);
+            const now = Date.now() + new Date().getTimezoneOffset() * 60 * 1000;
+            const last = new Date(last_update).getTime();
+            console.log(now, last, last_update);
 
             return now - last < ACTIVE_DELAY;
-        }
-
-        function addPlacemark(id, name, latitude, longitude) {
-            const placemark = new ymaps.Placemark(
-                [latitude, longitude], {
-                    balloonContentBody: name,
-                    id: id
-                }, {
-                    preset: 'islands#blackDotIcon',
-                });
-            myMap.geoObjects.add(placemark);
-            locateToPlacemark(id);
         }
 
         function getWorkerBalloon(first_name, last_name, phone) {
@@ -196,12 +221,14 @@
                 infoWindow.open(map, marker);
             });
             markers.push(marker);
+            return marker;
         }
 
         function getPlacemark(id) {
             for (let i = 0; i < markers.length; i++) {
                 if (markers[i]['id'] == id) return markers[i];
             }
+            return null;
         }
 
         function locateToPlacemark(id) {

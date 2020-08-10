@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $phone
- * @property string $first_name
- * @property string $last_name
+ * @property string|null $first_name
+ * @property string|null $last_name
  * @property float $latitude
  * @property float $longitude
  * @property \Illuminate\Support\Carbon $last_update

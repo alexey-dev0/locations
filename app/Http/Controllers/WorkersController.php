@@ -27,17 +27,28 @@ class WorkersController extends Controller
 
     public function update() {
         $data = Request::all();
-        $worker = Worker::wherePhone($data['phone']);
+        $worker = Worker::where('phone', $data['phone'])->first();
 
 
         $worker->latitude = $data['latitude'];
         $worker->longitude = $data['longitude'];
-        $worker->last_update = Carbon::now();
+        $worker->last_update = Carbon::now('UTC');
         $worker->save();
 
         return response()->json([
             'success' => true,
             'request' => $data
+        ]);
+    }
+
+    public function active() {
+        $data = Request::all();
+        $worker = Worker::whereId($data['id'])->first();
+        $active = Carbon::now() - $worker->last_update < 30 * 1000;
+
+        return response()->json([
+            'success' => true,
+            'active' => $active
         ]);
     }
 }
