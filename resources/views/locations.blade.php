@@ -15,46 +15,36 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Список работников</h3>
-                    </div>
-                    <div class="card-body locations-list">
-                        @foreach ($workers as $worker)
-                            <div class="row" id="{{ $worker->id }}">
-                                <div class="divShow">
-                                    <div>
-                                        @if ($worker->first_name || $worker->last_name)
-                                            <label class="name">{{ $worker->first_name.' '.$worker->last_name }}</label>
-                                            <label class="phone">{{ $worker->phone }}</label>
-                                        @else
-                                            <label class="name">{{ $worker->phone }}</label>
-                                        @endif
-                                        <label class="text-muted lat-lon">[{{$worker->latitude.'; '.$worker->longitude}}]</label>
-                                    </div>
-                                    <div class="status on">
-                                        <i class="fas fa-check fa-lg"></i>
-                                    </div>
-                                    <div class="status off">
-                                        <i class="fas fa-times fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            @unless ($loop->last)
-                                <hr>
-                            @endunless
-                        @endforeach
-                    </div>
-                </div>
+        <div id="map"></div>
+        <div class="card">
+            <div class="card-header">
+                <h3>Список работников</h3>
             </div>
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-body map-card">
-                        <div id="map"></div>
+            <div class="card-body locations-list">
+                @foreach ($workers as $worker)
+                    <div class="row" id="{{ $worker->id }}">
+                        <div class="divShow">
+                            <div>
+                                @if ($worker->first_name || $worker->last_name)
+                                    <label class="name">{{ $worker->first_name.' '.$worker->last_name }}</label>
+                                    <label class="phone">{{ $worker->phone }}</label>
+                                @else
+                                    <label class="name">{{ $worker->phone }}</label>
+                                @endif
+                                <label class="text-muted lat-lon">[{{$worker->latitude.'; '.$worker->longitude}}]</label>
+                            </div>
+                            <div class="status on">
+                                <i class="fas fa-check fa-lg"></i>
+                            </div>
+                            <div class="status off">
+                                <i class="fas fa-times fa-lg"></i>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    @unless ($loop->last)
+                        <hr>
+                    @endunless
+                @endforeach
             </div>
         </div>
     </div>
@@ -178,7 +168,6 @@
         function isActive(last_update) {
             const now = Date.now() + new Date().getTimezoneOffset() * 60 * 1000;
             const last = new Date(last_update).getTime();
-            console.log(now, last, last_update);
 
             return now - last < ACTIVE_DELAY;
         }

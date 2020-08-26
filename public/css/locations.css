@@ -1,24 +1,30 @@
-.btn-link {
-  border: none;
-  color: #343a40;
+.card {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  max-width: 280px;
 }
 
-.btn-link.edit {
-  margin-left: auto;
-}
-
-.card-header h3 {
+.card .card-header h3 {
   text-align: center;
   font-size: 20px;
   line-height: 32px;
 }
 
+#map {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .locations-list {
-  max-height: 575px;
+  max-height: 640px;
   overflow-y: auto;
   max-width: 100%;
   overflow-x: hidden;
-  padding: 1rem;
+  padding: 10px;
 }
 
 .locations-list hr {
@@ -103,14 +109,5 @@
 
 .locations-list .row .apply {
   margin-top: 8px;
-}
-
-.map-card {
-  padding: 0;
-}
-
-.map-card #map {
-  width: auto;
-  height: 640px;
 }
 
